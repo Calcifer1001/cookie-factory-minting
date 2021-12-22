@@ -55,7 +55,7 @@ header {
   display    : flex;
   flex-flow  : row;
   align-items: center;
-  margin     : 15px 15px 15px 15px;
+  /**margin     : 15px 15px 15px 15px;**/
 }
 
 h1 {
@@ -973,10 +973,12 @@ input[type="checkbox"]#terms-of-use:checked + label:before {
 .pool-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);  
+  
 }
 
 .grid-item {
   width: 90%;
+  margin: 0 5%;
 }
 
 .pool .input-group {
@@ -1001,4 +1003,108 @@ input[type="checkbox"]#terms-of-use:checked + label:before {
 
 .flex {
   display: flex;
+}
+
+/* navbar */
+
+#containerNavBar{
+  background: #F8EDE7;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 50px;
+}
+
+#containerNavBar nav{
+  margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    position: static;
+    max-width: 940px;
+    height: 80px;
+    left: 30px;
+    top: 250px;
+}
+nav #tabs {
+            
+  position: relative;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  cursor: pointer;
+}
+
+nav img{
+  width: 70px;
+  margin: 0 5px;
+}
+
+nav #minting, nav #market, nav #faq{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+
+  position: static;
+  height: 17px;
+  left: 175px;
+  top: 0px;
+  
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 14px;
+  /* identical to box height */
+  
+  letter-spacing: 0.05em;
+  
+  color: #915731;
+}
+
+.menuSelected{
+                
+  position: static;
+  width: 36.01px;
+  height: 0px;
+  left: 4.5px;
+  top: 17.01px;
+  margin: auto;
+
+  border: 1px solid #D18436;
+  transform: rotate(-1.6deg);
+              
+}
+
+.btnConnectWallet{
+  color:white ;
+  background: #915731 ;
+  border: 3px solid #D18436 ;
+  box-sizing: border-box ;
+  border-radius: 8px ;
+  padding: 10px 20px;
+}
+
+/*footer*/
+
+footer{
+  position: relative;
+  bottom:0px;
+  height:70px;
+  width:100%;
+  background:#915731;
+  display:flex;
+  justify-content:center;
+}
+
+footer p{
+  color:white;
+  align-self:center;
+  margin:'auto'
+}
+
+html,body,main{
+  min-height: 100vh;
 }

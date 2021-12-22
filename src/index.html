@@ -14,25 +14,37 @@
 
 <body>
 
-  <header>
+  <header id="containerNavBar">
     <nav>
-      <div>
+      <div id="tabs">
         <a href="#" id="logo">
-          <img src="" alt="logo.png"/>
-          <img class="logo" src="" alt="logo.png"/>
+          <img src="./assets/Cookie.png" alt="logo.png"/>
+          <img class="logo" src="./assets/Logo.png" alt="logo.png"/>
         </a>
-      </div>
+
       <!-- 
-      <a href='https://www.google.com'>Minting</a>
-      <a href='https://www.google.com'>FAQ</a>
-      <a href='https://www.google.com'>Market</a>
-      <a href="#" id="my-account" class="user-info"><span id="account-id">not connected</span></a>  -->
-      <!-- <a href="#" id="home">Home</a> -->
-      <a href='https://www.google.com' id="minting">Minting</a>
-      <a href='https://www.google.com' id="faq">FAQ</a>
-      <a href='https://www.google.com' id="market">Market</a>
-      <!-- <a href="#" id="faq">FAQ</a> -->
-      <a href="#" id="my-account" class="user-info"><span id="account-id">not connected</span></a>
+        <a href='https://www.google.com'>Minting</a>
+        <a href='https://www.google.com'>FAQ</a>
+        <a href='https://www.google.com'>Market</a>
+        <a href="#" id="my-account" class="user-info"><span id="account-id">not connected</span></a>  -->
+        <!-- <a href="#" id="home">Home</a> -->
+        <div>
+          <a href='https://www.google.com' id="minting">Minting</a>
+        <div class="menuSelected"></div>
+        </div>
+        <div>
+          <a href='' id="faq">FAQ</a>
+        <div class=""></div>
+        </div>
+        <div>
+          <a href='https://www.google.com' id="market">Market</a>
+        <div class=""></div>
+        </div>
+        <!-- <a href="#" id="faq">FAQ</a> -->
+      </div>
+      <div>
+        <a href="#" id="my-account" class="user-info btnConnectWallet"><span id="account-id">not connected</span></a>
+      </div>
     </nav>
   </header>
 
@@ -492,6 +504,10 @@
     </div>
 
   </div>
+
+  <footer >
+    <p >Made In North Pole &#47; Copyright &#174; 2021</p>
+  </footer>
 
   <script src="./index.ts"></script>
 </body>
