@@ -77,16 +77,16 @@ function uiInit() {
   //     }
   //   }
   qs('nav #my-account').onclick = navClickHandler_ConnectFirst
-  qs('#logo').onclick =
-    async function (event) {
-      event.preventDefault()
-      if (walletProvider.wallet.isConnected()) {
-        signedInFlow()
-      }
-      else {
-        signedOutFlow();
-      }
-    }
+  // qs('#logo').onclick =
+  //   async function (event) {
+  //     event.preventDefault()
+  //     if (walletProvider.wallet.isConnected()) {
+  //       signedInFlow()
+  //     }
+  //     else {
+  //       signedOutFlow();
+  //     }
+  //   }
 
   //generic nav handler
   function navClickHandler_ConnectFirst(event: Event) {
@@ -154,7 +154,7 @@ function uiInit() {
         }
       }
 
-    qs(`#${token} #near-balance a .max`).onclick =
+    qs(`#${token} #near-deposit-balance a .max`).onclick =
       async function (event) {
         try {
           event.preventDefault()
@@ -330,7 +330,7 @@ async function refreshAccountInfo() {
 
 
         let accountRegistred = await tokenCtr.contract.view("storage_balance_of", { account_id: walletProvider.wallet.getAccountId() })
-        console.log("accountRegistred: ", accountRegistred)
+        // console.log("accountRegistred: ", accountRegistred)
         if (accountRegistred == null) {
           qs(`#${token} #deposit`).style.display = "block"
           qs(`#${token} #activated`).style.display = "none"
@@ -361,8 +361,8 @@ async function refreshAccountInfo() {
           }
         }
         
-        qs(`#${token} #token-header span.name`).innerText = metaData.name;
-        console.log(`#${token}-container #total-staked`)
+        qs(`#${token} #token-header span.name`).innerText = metaData.symbol;
+        // console.log(`#${token}-container #total-staked`)
         qs(`#${token}-container #total-staked`).innerText = convertToDecimals(contractParams.total_staked, metaData.decimals, 5) + " " + metaData.symbol.toUpperCase()
 
         let stNearCtr = tokens[(tokenTypes.stNear as keyof typeof tokenTypes)]
@@ -370,6 +370,7 @@ async function refreshAccountInfo() {
         let stNearmetaData = await stNearCtr.tokenContractName.ft_metadata();
         let cookiePrice = BigInt(stNearcontractParams.total_staked) / BigInt(COOKIE_QUANTITY)
         const cookiePriceDisplayable = convertToDecimals(cookiePrice.toString(), stNearmetaData.decimals, 5) + " " + stNearmetaData.symbol.toUpperCase()
+        
         qs(".cookie-price-container .near.balance").innerHTML = cookiePriceDisplayable
 
         // update token data
@@ -394,10 +395,10 @@ async function refreshAccountInfo() {
       let staked = BigInt(tokenCtr.accountInfo);
   
       if (staked > 0) {
-        qs(`#${token} #near-balance a .max`).style.display = "inline";
+        qs(`#${token} #near-deposit-balance a .max`).style.display = "inline";
       }
       if (isDefined(tokenCtr.metaData)){
-        qsaInnerText(`#${token} #near-balance span.near.balance`, convertToDecimals(tokenCtr.accountInfo, tokenCtr.metaData.decimals, 2))
+        qsaInnerText(`#${token} #near-deposit-balance span.near.balance`, convertToDecimals(tokenCtr.accountInfo, tokenCtr.metaData.decimals, 2))
       }
     }
     

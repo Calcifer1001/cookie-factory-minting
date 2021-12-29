@@ -390,7 +390,7 @@ div {
 }
 
 .narwallets-logo {
-  background-image: url(assets/narwallets-logo.svg);
+  background-image: url(assets/narwallets_logo_128.png);
 }
 
 main {
@@ -406,6 +406,7 @@ form,
   /* display    : flex;
   flex-flow  : column; */
   align-items: center;
+  text-align: center;
 }
 
 article,
@@ -889,7 +890,7 @@ input[type="checkbox"]#terms-of-use:checked + label:before {
   margin: 0;
 }
 
-#near-balance a {
+#near-deposit-balance a {
   display: inline-block;
 }
 
