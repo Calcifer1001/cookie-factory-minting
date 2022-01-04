@@ -1,10 +1,10 @@
-export const STNEAR_POOL_CONTRACT_NAME = 'cookie-factory-pool-stnear.hardcoder.testnet'
+export const STNEAR_POOL_CONTRACT_NAME = 'cookie-factory-pool-stnear3.hardcoder.testnet'
 export const STNEAR_TOKEN_CONTRACT_NAME = 'meta-v2.pool.testnet'
 
-export const CHEDDAR_POOL_CONTRACT_NAME = 'cookie-factory-pool-cheddar.hardcoder.testnet'
+export const CHEDDAR_POOL_CONTRACT_NAME = 'cookie-factory-pool-cheddar3.hardcoder.testnet'
 export const CHEDDAR_TOKEN_CONTRACT_NAME = 'token.cheddar.testnet'
 
-export const NEXT_POOL_CONTRACT_NAME = 'cookie-factory-pool-meta.hardcoder.testnet'
+export const NEXT_POOL_CONTRACT_NAME = 'cookie-factory-pool-meta3.hardcoder.testnet'
 export const NEXT_TOKEN_CONTRACT_NAME = 'token.meta.pool.testnet'
 
 type GetConfigResult = {

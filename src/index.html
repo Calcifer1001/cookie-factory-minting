@@ -18,20 +18,20 @@
     <nav>
       <div id="tabs">
         <a href="/" id="logo">
-          <img src="./assets/cookie-logo-final.svg" alt="logo.png"/>
+          <img src="./assets/cookie-logo-final.svg" alt="logo.png" />
         </a>
 
         <div>
           <a href='/minting' id="minting">Minting</a>
-        <div class="menuSelected"></div>
+          <div class="menuSelected"></div>
         </div>
         <div>
           <a href='/faq' id="faq">FAQ</a>
-        <div class=""></div>
+          <div class=""></div>
         </div>
         <div>
           <a href='/market' id="market">Market</a>
-        <div class=""></div>
+          <div class=""></div>
         </div>
         <!-- <a href="#" id="faq">FAQ</a> -->
       </div>
@@ -63,22 +63,45 @@
       <div id="timer"></div>
       <div class="contract-data-container">
 
-        <div class="data-item cookie-price-container">
+        <!-- <div class="data-item cookie-price-container">
           <img src="assets/miniwallet.svg" />
-          <div id="cookie-price">CURRENT COOKIE PRICE</div>
+          <div id="cookie-info">Your total combined deposit:
+            <span id="own-total-deposit">###stNear</span>
+            - Current cookie price:
+            <span id="cookie-price"></span> stNear
+            - You will get
+            <span id="cookies-to-receive">### cookies</span>
+          </div>
+          <div> - Min cookie price: 1 stNear</div>
           <div>
             <span class="near balance"></span>
           </div>
-        </div>
+        </div> -->
 
 
         <div class="pool-container">
 
-          <div id="stNear-container" class="grid-item pool">
+          <!-- <div id="stNear-container" class="grid-item pool">
+            <div class="result-info">
+              <div class="token-info">
+                Current cookie price:
+                <span id="cookie-price"></span> STNEAR
+                - You will get
+                <span id="cookies-to-receive">### cookies</span>
+              </div>
+              <div class="image-container">
+                <img src="https://cookiefactory.co/output/1.png" />
+                <img src="https://cookiefactory.co/output/2.png" />
+                <img src="https://cookiefactory.co/output/3.png" />
+                <img src="https://cookiefactory.co/output/4.png" />
+                <img src="https://cookiefactory.co/output/5.png" />
+              </div>
+            </div>
             <form id="stNear" onkeydown="return event.key != 'Enter';">
+
               <div id="token-header" class="icon-header">
                 <img class="icon" src="./assets/loading.svg" width="50px" height="50px">
-                <span class="name">stNear</span>
+                <span class="name">META</span>
               </div>
               <div class="pool-meta" style="display:none">
                 <div>Returnable</div>
@@ -108,7 +131,7 @@
                   <div class="pool-meta wallet-balance data-container">
                     <div class="data-item">
                       <img class="ml-6" src="assets/miniwallet.svg" />
-                      <div id="wallet-available">AVAILABLE</div>
+                      <div id="wallet-available">YOUR WALLET</div>
                     </div>
                     <div id="near-balance"><span class="near balance"></span>&nbsp;
                       <a href="#">
@@ -119,23 +142,33 @@
                   <div class="pool-meta staked data-container">
                     <div class="data-item">
                       <img src="assets/cart.svg" />
-                      <div class="">YOUR DEPOSIT</div>
+                      <div>
+                        YOU DEPOSITED
+                      </div>
                     </div>
-                    <div id="near-deposit-balance"><span class="near balance"></span>&nbsp;
-                      <a href="#">
-                        <div class="max">MAX</div>
-                      </a>
+                    <div id="near-deposit-balance">
+                      <span class="near balance">
+                        <span class="value"></span>
+
+                      </span>&nbsp;
+
+                       <div>
+                        <a href="#">
+                          <div class="max">MAX</div>
+                        </a>
+                      </div> 
                     </div>
 
                   </div>
                   <div class="pool-meta stat-line data-container">
                     <div class="data-item">
                       <img src="assets/total-deposit.svg" />
-                      <div>TOTAL DEPOSIT</div>
+                      <div>TOTAL DEPOSITED</div>
                     </div>
                     <div id="total-staked" class="near balance"></div>
                   </div>
                 </div>
+
               </div>
               <div id="deposit" style="display:none">
                 <br>
@@ -143,13 +176,24 @@
                 <p>0.05 NEAR to activate</p>
               </div>
             </form>
-          </div>
+          </div> -->
 
-          <div id="cheddar-container" class="grid-item pool">
-            <form id="cheddar" onkeydown="return event.key != 'Enter';">
+          <div id="stNear-container" class="grid-item pool">
+            <div class="result-info">
+              <span>Cookie samples</span>
+              <div class="image-container">
+                <img src="https://cookiefactory.co/output/6.png" />
+                <img src="https://cookiefactory.co/output/7.png" />
+                <img src="https://cookiefactory.co/output/8.png" />
+                <img src="https://cookiefactory.co/output/9.png" />
+                <img src="https://cookiefactory.co/output/10.png" />
+              </div>
+            </div>
+            <form id="stNear" onkeydown="return event.key != 'Enter';">
+
               <div id="token-header" class="icon-header">
                 <img class="icon" src="./assets/loading.svg" width="50px" height="50px">
-                <span class="name">Cheddar</span>
+                <span class="name">META</span>
               </div>
               <div class="pool-meta" style="display:none">
                 <div>Returnable</div>
@@ -165,15 +209,13 @@
                     <input id="stakeAmount" class="near amount input-box" inputmode="numeric" placeholder="Enter Amount"
                       onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Amount'"
                       autocomplete="off">&nbsp;<span id="max" class="inside-input">Max</span>
-
-
                     <span class="token-name"></span>
                   </div>
 
                   <div class="pool-meta actions">
                     <div class="hQrVZb">
-                      <button id="stakecheddar" class="hwJKVX deposit" type="submit">DEPOSIT</button>
-                      <button id="unstakecheddar" class="gAaTZf withdraw" type="submit">WITHDRAW</button>
+                      <button id="stakestNear" class="hwJKVX deposit" type="submit">DEPOSIT</button>
+                      <button id="unstakestNear" class="gAaTZf withdraw" type="submit">WITHDRAW</button>
                     </div>
                   </div>
                 </fieldset>
@@ -181,10 +223,9 @@
                   <div class="pool-meta wallet-balance data-container">
                     <div class="data-item">
                       <img class="ml-6" src="assets/miniwallet.svg" />
-                      <div id="wallet-available">AVAILABLE</div>
+                      <div id="wallet-available">YOUR WALLET</div>
                     </div>
-                    <div class="flex">
-                      <span class="near balance"></span>&nbsp;
+                    <div id="near-balance"><span class="near balance"></span>&nbsp;
                       <a href="#">
                         <div class="max">MAX</div>
                       </a>
@@ -193,21 +234,52 @@
                   <div class="pool-meta staked data-container">
                     <div class="data-item">
                       <img src="assets/cart.svg" />
-                      <div class="">YOUR DEPOSIT</div>
+                      <div>
+                        YOU DEPOSITED
+                      </div>
                     </div>
-                    <div id="near-deposit-balance"><span class="near balance"></span>&nbsp;
-                      <a href="#">
-                        <div class="max">MAX</div>
-                      </a>
+                    <div id="near-deposit-balance">
+                      <span class="near balance">
+                        <span class="value"></span>
+
+                      </span>&nbsp;
                     </div>
 
                   </div>
                   <div class="pool-meta stat-line data-container">
                     <div class="data-item">
                       <img src="assets/total-deposit.svg" />
-                      <div>TOTAL DEPOSIT</div>
+                      <div>TOTAL DEPOSITED</div>
                     </div>
                     <div id="total-staked" class="near balance"></div>
+                  </div>
+                  <div class="pool-meta stat-line data-container">
+                    <div class="data-item">
+                      <img src="assets/cart.svg" />
+                      <div>
+                        CURRENT COOKIE PRICE:
+                      </div>
+                    </div>
+                    <div id="stNear-cookie-price">
+                      <span class="near balance">
+                        <span class="value"></span>
+                        STNEAR
+                      </span>&nbsp;
+                    </div>
+                  </div>
+                  <div class="pool-meta stat-line data-container">
+                    <div class="data-item">
+                      <img src="assets/cart.svg" />
+                      <div>
+                        YOU WILL GET
+                      </div>
+                    </div>
+                    <div id="stNear-cookie-amount">
+                      <span class="near balance">
+                        <span class="value"></span>
+                        COOKIES
+                      </span>&nbsp;
+                    </div>
                   </div>
                 </div>
               </div>
@@ -220,7 +292,18 @@
           </div>
 
           <div id="next-container" class="grid-item pool">
+            <div class="result-info">
+              <span>Team $META samples</span>
+              <div class="image-container">
+                <img src="https://cookiefactory.co/output/6.png" />
+                <img src="https://cookiefactory.co/output/7.png" />
+                <img src="https://cookiefactory.co/output/8.png" />
+                <img src="https://cookiefactory.co/output/9.png" />
+                <img src="https://cookiefactory.co/output/10.png" />
+              </div>
+            </div>
             <form id="next" onkeydown="return event.key != 'Enter';">
+
               <div id="token-header" class="icon-header">
                 <img class="icon" src="./assets/loading.svg" width="50px" height="50px">
                 <span class="name">META</span>
@@ -253,7 +336,7 @@
                   <div class="pool-meta wallet-balance data-container">
                     <div class="data-item">
                       <img class="ml-6" src="assets/miniwallet.svg" />
-                      <div id="wallet-available">AVAILABLE</div>
+                      <div id="wallet-available">YOUR WALLET</div>
                     </div>
                     <div id="near-balance"><span class="near balance"></span>&nbsp;
                       <a href="#">
@@ -264,19 +347,255 @@
                   <div class="pool-meta staked data-container">
                     <div class="data-item">
                       <img src="assets/cart.svg" />
-                      <div class="">YOUR DEPOSIT</div>
+                      <div>
+                        YOU DEPOSITED
+                      </div>
                     </div>
-                    <div id="near-deposit-balance"><span class="near balance"></span>&nbsp;
-                      <a href="#">
-                        <div class="max">MAX</div>
-                      </a>
+                    <div id="near-deposit-balance">
+                      <span class="near balance">
+                        <span class="value"></span>
+                        $META
+                      </span>&nbsp;
                     </div>
 
                   </div>
                   <div class="pool-meta stat-line data-container">
                     <div class="data-item">
                       <img src="assets/total-deposit.svg" />
-                      <div>TOTAL DEPOSIT</div>
+                      <div>TOTAL DEPOSITED</div>
+                    </div>
+                    <div id="total-staked" class="near balance"></div>
+                  </div>
+                  <div class="pool-meta stat-line data-container">
+                    <div class="data-item">
+                      <img src="assets/cart.svg" />
+                      <div>
+                        CURRENT COOKIE PRICE:
+                      </div>
+                    </div>
+                    <div id="next-cookie-price">
+                      <span class="near balance">
+                        <span class="value"></span>
+                        $META
+                      </span>&nbsp;
+                    </div>
+                  </div>
+                  <div class="pool-meta stat-line data-container">
+                    <div class="data-item">
+                      <img src="assets/cart.svg" />
+                      <div>
+                        YOU WILL GET
+                      </div>
+                    </div>
+                    <div id="next-cookie-amount">
+                      <span class="near balance">
+                        <span class="value"></span>
+                        COOKIES
+                      </span>&nbsp;
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="deposit" style="display:none">
+                <br>
+                <button class="activate" type="submit">Activate</button>
+                <p>0.05 NEAR to activate</p>
+              </div>
+            </form>
+          </div>
+
+          <div id="cheddar-container" class="grid-item pool">
+            <div class="result-info">
+              <span>Team Cheddar samples</span>
+              <div class="image-container">
+                <img src="https://cookiefactory.co/output/6.png" />
+                <img src="https://cookiefactory.co/output/7.png" />
+                <img src="https://cookiefactory.co/output/8.png" />
+                <img src="https://cookiefactory.co/output/9.png" />
+                <img src="https://cookiefactory.co/output/10.png" />
+              </div>
+            </div>
+            <form id="cheddar" onkeydown="return event.key != 'Enter';">
+
+              <div id="token-header" class="icon-header">
+                <img class="icon" src="./assets/loading.svg" width="50px" height="50px">
+                <span class="name">CHEDDAR</span>
+              </div>
+              <div class="pool-meta" style="display:none">
+                <div>Returnable</div>
+              </div>
+              <div class="pool-meta" style="display:none">
+                <div>Boost</div>
+                <div>15%</div>
+              </div>
+              <div id="activated" style="display:none">
+
+                <fieldset id="fieldset">
+                  <div class="input-group">
+                    <input id="stakeAmount" class="near amount input-box" inputmode="numeric" placeholder="Enter Amount"
+                      onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Amount'"
+                      autocomplete="off">&nbsp;<span id="max" class="inside-input">Max</span>
+                    <span class="token-name"></span>
+                  </div>
+
+                  <div class="pool-meta actions">
+                    <div class="hQrVZb">
+                      <button id="stakecheddar" class="hwJKVX deposit" type="submit">DEPOSIT</button>
+                      <button id="unstakecheddar" class="gAaTZf withdraw" type="submit">WITHDRAW</button>
+                    </div>
+                  </div>
+                </fieldset>
+                <div class="data">
+                  <div class="pool-meta wallet-balance data-container">
+                    <div class="data-item">
+                      <img class="ml-6" src="assets/miniwallet.svg" />
+                      <div id="wallet-available">YOUR WALLET</div>
+                    </div>
+                    <div id="near-balance"><span class="near balance"></span>&nbsp;
+                      <a href="#">
+                        <div class="max">MAX</div>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="pool-meta staked data-container">
+                    <div class="data-item">
+                      <img src="assets/cart.svg" />
+                      <div>
+                        YOU DEPOSITED
+                      </div>
+                    </div>
+                    <div id="near-deposit-balance">
+                      <span class="near balance">
+                        <span class="value"></span>
+
+                      </span>&nbsp;
+                    </div>
+
+                  </div>
+                  <div class="pool-meta stat-line data-container">
+                    <div class="data-item">
+                      <img src="assets/total-deposit.svg" />
+                      <div>TOTAL DEPOSITED</div>
+                    </div>
+                    <div id="total-staked" class="near balance"></div>
+                  </div>
+                  <div class="pool-meta stat-line data-container">
+                    <div class="data-item">
+                      <img src="assets/cart.svg" />
+                      <div>
+                        CURRENT COOKIE PRICE:
+                      </div>
+                    </div>
+                    <div id="cheddar-cookie-price">
+                      <span class="near balance">
+                        <span class="value"></span>
+                        CHEDDAR
+                      </span>&nbsp;
+                    </div>
+                  </div>
+                  <div class="pool-meta stat-line data-container">
+                    <div class="data-item">
+                      <img src="assets/cart.svg" />
+                      <div>
+                        YOU WILL GET
+                      </div>
+                    </div>
+                    <div id="cheddar-cookie-amount">
+                      <span class="near balance">
+                        <span class="value"></span>
+                        COOKIES
+                      </span>&nbsp;
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="deposit" style="display:none">
+                <br>
+                <button class="activate" type="submit">Activate</button>
+                <p>0.05 NEAR to activate</p>
+              </div>
+            </form>
+          </div>
+
+          <!-- <div id="cheddar-container" class="grid-item pool">
+            <div class="result-info">
+              <div class="token-info">
+                Current cookie price:
+                <span id="cookie-price"></span> $META
+                - You will get
+                <span id="cookies-to-receive">### cookies</span>
+              </div>
+              <div class="image-container">
+                <img src="https://cookiefactory.co/output/11.png" />
+                <img src="https://cookiefactory.co/output/12.png" />
+                <img src="https://cookiefactory.co/output/13.png" />
+                <img src="https://cookiefactory.co/output/14.png" />
+                <img src="https://cookiefactory.co/output/15.png" />
+              </div>
+            </div>
+            <form id="cheddar" onkeydown="return event.key != 'Enter';">
+
+              <div id="token-header" class="icon-header">
+                <img class="icon" src="./assets/loading.svg" width="50px" height="50px">
+                <span class="name">META</span>
+              </div>
+              <div class="pool-meta" style="display:none">
+                <div>Returnable</div>
+              </div>
+              <div class="pool-meta" style="display:none">
+                <div>Boost</div>
+                <div>15%</div>
+              </div>
+              <div id="activated" style="display:none">
+
+                <fieldset id="fieldset">
+                  <div class="input-group">
+                    <input id="stakeAmount" class="near amount input-box" inputmode="numeric" placeholder="Enter Amount"
+                      onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Amount'"
+                      autocomplete="off">&nbsp;<span id="max" class="inside-input">Max</span>
+                    <span class="token-name"></span>
+                  </div>
+
+                  <div class="pool-meta actions">
+                    <div class="hQrVZb">
+                      <button id="stakecheddar" class="hwJKVX deposit" type="submit">DEPOSIT</button>
+                      <button id="unstakecheddar" class="gAaTZf withdraw" type="submit">WITHDRAW</button>
+                    </div>
+                  </div>
+                </fieldset>
+                <div class="data">
+                  <div class="pool-meta wallet-balance data-container">
+                    <div class="data-item">
+                      <img class="ml-6" src="assets/miniwallet.svg" />
+                      <div id="wallet-available">YOUR WALLET</div>
+                    </div>
+                    <div id="near-balance"><span class="near balance"></span>&nbsp;
+                      <a href="#">
+                        <div class="max">MAX</div>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="pool-meta staked data-container">
+                    <div class="data-item">
+                      <img src="assets/cart.svg" />
+                      <div>
+                        YOU DEPOSITED
+                      </div>
+                    </div>
+                    <div id="near-deposit-balance">
+                      <span class="near balance">
+                        <span class="value"></span>
+
+                      </span>&nbsp;
+
+                      
+                    </div>
+
+                  </div>
+                  <div class="pool-meta stat-line data-container">
+                    <div class="data-item">
+                      <img src="assets/total-deposit.svg" />
+                      <div>TOTAL DEPOSITED</div>
                     </div>
                     <div id="total-staked" class="near balance"></div>
                   </div>
@@ -289,143 +608,13 @@
                 <p>0.05 NEAR to activate</p>
               </div>
             </form>
-          </div>
+          </div> -->
+
+
         </div>
-        <!-- <div id="next-container" class="grid-item">
-          <form id="next" onkeydown="return event.key != 'Enter';">
-            <div id="token-header" class="icon-header">
-              <img class="icon" src="./assets/loading.svg" width="50px" height="50px">
-              <span class="name">Next</span>
-            </div>
-            <h2>Stake <span class="token-name"></span></h2>
-            <div class="pool-meta">
-              <div>Returnable</div>
-            </div>
-            <div class="pool-meta">
-              <div>Booost</div>
-              <div>15%</div>
-            </div>
-            <div id="activated" style="display:none">
-              <div class="pool-meta staked">
-                <div class="token-name"></div>
-                <div class="">Staked</div>
-              </div>
-              <div class="pool-meta staked amount">
-                <div id="near-balance"><span class="near balance"></span>&nbsp;<a href="#"><span class="max"
-                      style="display:none">max</span></a></div>
-                <div>&nbsp;</div>
-              </div>
-              <fieldset id="fieldset">
-                <div class="input-group">
-                  <input id="stakeAmount" class="near amount input-box" inputmode="numeric" placeholder="Enter Amount"
-                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Amount'"
-                    autocomplete="off">&nbsp;<span id="max" class="inside-input">Max</span>
-                  <span class="token-name"></span>
-                </div>
-                <div class="pool-meta wallet-balance">
-                  <div id="wallet-available">Available to stake:&nbsp;<span class="near balance"></span>&nbsp;<a
-                      href="#"><span class="max" style="display:none">max</span></a></div>
-                </div>
-                <div class="pool-meta actions">
-                  <div class="hQrVZb">
-                    <button id="unstakenext" class="gAaTZf" type="submit">UnStake</button>
-                    <button id="stakenext" class="hwJKVX" type="submit">Stake</button>
-                  </div>
-                </div>
-                <div class="disclaimer">
 
-                  <label>✅&nbsp;&nbsp;By staking, I agree to the <a href="#" id="terms-of-use">terms of
-                      use</a></label><br>
-                </div>
-              </fieldset>
-            </div>
-            <div id="deposit" style="display:none">
-              <br>
-              <button class="activate" type="submit">Activate</button>
-              <p>0.05 NEAR deposit for storage costs</p>
-            </div>
-          </form>
-
-          <article id="next-pool-stats" style="">
-            <h4><span class="token-name"></span> Pool Stats</h4>
-            <div class="stat-line">
-              <span>Total Staked</span>
-              <span id="total-staked" class="near balance"></span>
-            </div>
-          </article>
-        </div> -->
       </div>
       </div>
-    </section>
-
-    <section id="faq" style="display:none">
-
-      <h2>FAQ</h2>
-
-      <article>
-
-        <label class="collapsible">
-          <input type="checkbox" />
-          <div class="collapser">
-            <span class="arrow"></span>
-            What is cheddar?
-          </div>
-          <div class="collapsed"><b>Cheddar</b> is a NEP-141 loyalty token that rewards users of the NEAR ecosystem of
-            dApps. Our vision is to help create a thriving ecosystem of NEAR dApps and DeFi through strategic
-            partnerships that promote the use of NEAR while rewarding users.<br /><br />Use NEAR dApps to Farm, Stake,
-            LP and stack Cheddar!
-          </div>
-        </label>
-
-        <label class="collapsible">
-          <input type="checkbox" />
-          <div class="collapser">
-            <span class="arrow"></span>
-            Does Cheddar have an airdrop?
-          </div>
-          <div class="collapsed">No, instead of an airdrop we opted to allow everyone in the NEAR ecosystem the
-            opportunity to stack some Cheddar.<ul>
-              <li>Unlimited Cheddar</li>
-              <li>20 days of farming</li>
-              <li>Stake NEAR to Farm Cheddar</li>
-            </ul>
-          </div>
-        </label>
-
-        <label class="collapsible">
-          <input type="checkbox" />
-          <div class="collapser">
-            <span class="arrow"></span>
-            What happens to my stNEAR?
-          </div>
-          <div class="collapsed">It is solely for the purpose of farming Cheddar. We don't transfer, leverage or lock
-            your NEAR.
-          </div>
-        </label>
-
-        <label class="collapsible">
-          <input type="checkbox" />
-          <div class="collapser">
-            <span class="arrow"></span>How long do I have to leave my NEAR staked?
-          </div>
-          <div class="collapsed">That's completely up to you at this stage. The longer you stake, the more Cheddar you
-            earn.
-          </div>
-        </label>
-
-        <label class="collapsible">
-          <input type="checkbox" />
-          <div class="collapser">
-            <span class="arrow"></span>Is there a Liquidity Pool (LP)?
-          </div>
-          <div class="collapsed">As a loyalty token Cheddar is meant to be used in the NEAR ecosystem of dApps. The team
-            does not have an active plan to launch liquidity pools (LP's). The Cheddar DAO however can vote to provide
-            Cheddar as a loyalty token for LP's the community or other AMM / DEXes launch in a future phase.
-          </div>
-        </label>
-
-      </article>
-
     </section>
 
     <section id="my-account" style="display:none">
@@ -498,8 +687,8 @@
 
   </div>
 
-  <footer >
-    <p >Made In North Pole &#47; Copyright &#174; 2021</p>
+  <footer>
+    <p>Made In North Pole &#47; Copyright &#174; 2022</p>
   </footer>
 
   <script src="./index.ts"></script>

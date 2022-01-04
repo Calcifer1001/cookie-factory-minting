@@ -34,17 +34,23 @@ let tokens: { [key in keyof typeof tokenTypes]: TokenData } = {
   stNear: {
     ...defaultContractData(),
     contract: new StakingPoolP1(STNEAR_POOL_CONTRACT_NAME, walletProvider),
-    tokenContractName: new NEP141Trait(STNEAR_TOKEN_CONTRACT_NAME, walletProvider)
+    tokenContractName: new NEP141Trait(STNEAR_TOKEN_CONTRACT_NAME, walletProvider),
+    cookieQuantity: 6000,
+    minCookiePrice: 1
   },
   cheddar: {
     ...defaultContractData(),
     contract: new StakingPoolP1(CHEDDAR_POOL_CONTRACT_NAME, walletProvider),
-    tokenContractName: new NEP141Trait(CHEDDAR_TOKEN_CONTRACT_NAME, walletProvider)
+    tokenContractName: new NEP141Trait(CHEDDAR_TOKEN_CONTRACT_NAME, walletProvider),
+    cookieQuantity: 1500,
+    minCookiePrice: 500
   },
   next: {
     ...defaultContractData(),
     contract: new StakingPoolP1(NEXT_POOL_CONTRACT_NAME, walletProvider),
-    tokenContractName: new NEP141Trait(NEXT_TOKEN_CONTRACT_NAME, walletProvider)
+    tokenContractName: new NEP141Trait(NEXT_TOKEN_CONTRACT_NAME, walletProvider),
+    cookieQuantity: 3000,
+    minCookiePrice: 300
   }
 }
 
@@ -135,10 +141,10 @@ function uiInit() {
     qs(`#${token} button.activate`).onclick =
       async function (event) {
         event.preventDefault()
-        qs(`#${token} #deposit`).style.display = "none";
-        qs(`#${token} #activated`).style.display = "block";
         let tokenCtr = tokens[(token as keyof typeof tokenTypes)]
         await tokenCtr.contract.storageDeposit();
+        qs(`#${token} #deposit`).style.display = "none";
+        qs(`#${token} #activated`).style.display = "block";
       }
 
     qs(`#${token} .wallet-balance a .max`).onclick =
@@ -154,26 +160,25 @@ function uiInit() {
         }
       }
 
-    qs(`#${token} #near-deposit-balance a .max`).onclick =
-      async function (event) {
-        try {
-          event.preventDefault()
-          let tokenCtr = tokens[(token as keyof typeof tokenTypes)]
-          qsi(`#${token} #stakeAmount`).value = convertToDecimals(tokenCtr.accountInfo, tokenCtr.metaData!.decimals).toString()
-        }
-        catch (ex) {
-          showErr(ex)
-        }
-      }
-
-  }
+    // qs(`#${token} #near-deposit-balance a .max`).onclick =
+    //   async function (event) {
+    //     try {
+    //       event.preventDefault()
+    //       let tokenCtr = tokens[(token as keyof typeof tokenTypes)]
+    //       qsi(`#${token} #stakeAmount`).value = convertToDecimals(tokenCtr.accountInfo, tokenCtr.metaData!.decimals).toString()
+    //     }
+    //     catch (ex) {
+    //       showErr(ex)
+    //     }
+    //   }
+    }
 }
 uiInit()
 
 //Form submission
 //qs('form#stake/unstake').onsubmit =
 async function submitForm(tokenName: tokenTypes, form: HTMLFormElement, action: string, token: TokenData) {
-  if (!isDefined(token.metaData) || !isDefined(token.tokenContractName) || !isDefined(token.contract) || !isDefined(token.totalStakedLocal)) {
+  if (!isDefined(token.metaData) || !isDefined(token.tokenContractName) || !isDefined(token.contract)/* || !isDefined(token.totalStakedLocal)*/) {
     showErr("Contracts loading")
     return
   }
@@ -191,21 +196,21 @@ async function submitForm(tokenName: tokenTypes, form: HTMLFormElement, action: 
     if (!token.contractParams.is_active) throw Error("pools are not open yet")
 
     //get amount
-    const min_deposit_amount = 1;
-    let amount: bigint = BigInt(stakeAmount.value)
+    const min_deposit_amount = 0.01;
+    let amount: Number = toNumber(stakeAmount.value)
 
     if (isStaking) {
       // make a call to the smart contract
-      if (amount < min_deposit_amount) throw Error(`Stake at least ${min_deposit_amount} ${token.metaData.name}`);
+      if (amount < min_deposit_amount) throw Error(`Deposit at least ${min_deposit_amount} ${token.metaData.symbol}`);
       await token.tokenContractName.ft_transfer_call(token.contract.contractId, convertToBase(stakeAmount.value, token.metaData.decimals), "to pool")
-      token.totalStakedLocal += amount
+      // token.totalStakedLocal += amount
     }
     else {
 
       if (amount <= 0) throw Error(`Unstake a positive amount`);
 
       await token.contract.unstake(convertToBase(stakeAmount.value, token.metaData.decimals))
-      token.totalStakedLocal -= amount
+      // token.totalStakedLocal -= amount
     }
 
     //clear form
@@ -365,19 +370,27 @@ async function refreshAccountInfo() {
         // console.log(`#${token}-container #total-staked`)
         qs(`#${token}-container #total-staked`).innerText = convertToDecimals(contractParams.total_staked, metaData.decimals, 5) + " " + metaData.symbol.toUpperCase()
 
-        let stNearCtr = tokens[(tokenTypes.stNear as keyof typeof tokenTypes)]
-        let stNearcontractParams = await stNearCtr.contract.get_contract_params()
-        let stNearmetaData = await stNearCtr.tokenContractName.ft_metadata();
-        let cookiePrice = BigInt(stNearcontractParams.total_staked) / BigInt(COOKIE_QUANTITY)
-        const cookiePriceDisplayable = convertToDecimals(cookiePrice.toString(), stNearmetaData.decimals, 5) + " " + stNearmetaData.symbol.toUpperCase()
+        let cookiePrice = BigInt(contractParams.total_staked) / BigInt(tokenCtr.cookieQuantity)
+        let cookiePriceDisplayable = convertToDecimals(cookiePrice.toString(), metaData.decimals, 5)
+        if(Number(cookiePriceDisplayable) < tokenCtr.minCookiePrice) {
+          cookiePriceDisplayable = tokenCtr.minCookiePrice.toString()
+          cookiePrice = BigInt(tokenCtr.minCookiePrice * 10**metaData.decimals)
+        }
+        qs(`#${token}-container #${token}-cookie-price .value`).innerHTML = cookiePriceDisplayable
+
+        if(cookiePrice != 0n) {
+          console.log("Cookie price: ", cookiePrice)
+          console.log("accountInfo: ", accountInfo)
+          let cookiesReceived = BigInt(accountInfo) / BigInt(cookiePrice);
+          qs(`#${token}-container #${token}-cookie-amount .value`).innerHTML = cookiesReceived.toString()
+        }
         
-        qs(".cookie-price-container .near.balance").innerHTML = cookiePriceDisplayable
 
         // update token data
         tokenCtr.metaData = metaData
         tokenCtr.contractParams = contractParams
         tokenCtr.accountInfo = accountInfo
-        tokenCtr.totalStakedLocal = BigInt(contractParams.total_staked)
+        // tokenCtr.totalStakedLocal = BigInt(contractParams.total_staked)
       }
     }
     else {
@@ -385,7 +398,7 @@ async function refreshAccountInfo() {
         let tokenCtr = tokens[(token as keyof typeof tokenTypes)]
 
         tokenCtr.accountInfo = "0";
-        tokenCtr.totalStakedLocal = BigInt(0);
+        // tokenCtr.totalStakedLocal = BigInt(0);
       }
       
     }
@@ -395,10 +408,10 @@ async function refreshAccountInfo() {
       let staked = BigInt(tokenCtr.accountInfo);
   
       if (staked > 0) {
-        qs(`#${token} #near-deposit-balance a .max`).style.display = "inline";
+        // qs(`#${token} #near-deposit-balance a .max`).style.display = "inline";
       }
       if (isDefined(tokenCtr.metaData)){
-        qsaInnerText(`#${token} #near-deposit-balance span.near.balance`, convertToDecimals(tokenCtr.accountInfo, tokenCtr.metaData.decimals, 2))
+        qsaInnerText(`#${token} #near-deposit-balance span.near.balance .value`, convertToDecimals(tokenCtr.accountInfo, tokenCtr.metaData.decimals, 2))
       }
     }
     
@@ -420,6 +433,50 @@ function narwalletDisconnected(ev: CustomEvent) {
   signedOutFlow()
 }
 
+async function setCountdown() {
+  let stNearCtr = tokens[(tokenTypes.stNear as keyof typeof tokenTypes)]
+  let stNearcontractParams = await stNearCtr.contract.get_contract_params()
+    
+  var endDate = new Date(stNearcontractParams.closing_date);
+  
+  var countDownDate = new Date(endDate.getTime() - endDate.getTimezoneOffset() * 60000)
+  console.log(countDownDate)
+
+  var x = setInterval(function () {
+
+    // Get today's date and time
+    var d = new Date();
+    var d = new Date(d.getTime() - d.getTimezoneOffset() * 60000)
+
+    // Find the distance between now and the count down date
+    var distance = countDownDate.getTime() - d.getTime();
+
+    // Time calculations for days, hours, minutes and seconds
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    // Display the result in the element with id="demo"
+    (document.getElementById("timer") as HTMLElement).innerText = "Fair mint ends in: " + days + " days, " + hours + " hours, "
+      + minutes + " minutes, " + seconds + " seconds";
+
+    // If the count down is finished, write some text
+    if (distance < 0) {
+      clearInterval(x);
+      (document.getElementById("timer") as HTMLElement).innerText = "Fair mint is over";
+      const buttons = qsa("button")
+      const inputs = qsa("input")
+      buttons.forEach(button => {
+        button.setAttribute("disabled", "disabled")
+      });
+      inputs.forEach(input => {
+        input.setAttribute("disabled", "disabled")
+      });
+    }
+  }, 1000);
+}
+
 window.onload = async function () {
   signedOutFlow()
   try {
@@ -433,35 +490,7 @@ window.onload = async function () {
     if (env !== nearConfig.networkId){
       nearConfig = getConfig(env);
     }
-
-    var countDownDate = new Date("Dec 23, 2021 00:00:00 UTC");
-    var countDownDate = new Date(countDownDate.getTime() - countDownDate.getTimezoneOffset() * 60000)
-
-    var x = setInterval(function () {
-
-      // Get today's date and time
-      var d = new Date();
-      var d = new Date(d.getTime() - d.getTimezoneOffset() * 60000)
-
-      // Find the distance between now and the count down date
-      var distance = countDownDate.getTime() - d.getTime();
-
-      // Time calculations for days, hours, minutes and seconds
-      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      // Display the result in the element with id="demo"
-      (document.getElementById("timer") as HTMLElement).innerHTML = "<h2><span style='color:#222'>Ends In: </span><span style='color:rgba(80,41,254,0.88)'>" + days + "d : " + hours + "h : "
-        + minutes + "m : " + seconds + "s" + "</span></h2>";
-
-      // If the count down is finished, write some text
-      if (distance < 0) {
-        clearInterval(x);
-        (document.getElementById("timer") as HTMLElement).innerHTML = "<h2 style='color:rgba(80,41,254,0.88)'>FARM IS LIVE!</h2>";
-      }
-    }, 1000);
+    
 
 
     //console.log(nearConfig.farms[0].networkId)
@@ -571,8 +600,8 @@ window.onload = async function () {
       //not signed-in 
       await signedOutFlow() //show home-not-connected -> select wallet page
     }
-  }
-  catch (ex) {
+    await setCountdown()
+  } catch (ex) {
     showErr(ex)
   }
 }
