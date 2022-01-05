@@ -18,7 +18,7 @@ export type TokenData = {
     accountInfo: string,
     contractParams: ContractParams,
     metaData?: FungibleTokenMetadata,
-    totalStakedLocal?: bigint,
+    totalStakedLocal?: number,
     cookieQuantity: number,
     minCookiePrice: number
 }

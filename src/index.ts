@@ -71,28 +71,8 @@ function uiInit() {
   qs('#near-web-wallet-box').onclick = loginNearWebWallet
   qs('#narwallets-wallet-box').onclick = loginNarwallets
 
-  //nav my-account "home"
-  // qs('nav #home').onclick =
-  //   async function (event) {
-  //     event.preventDefault()
-  //     if (walletProvider.wallet.isConnected()) {
-  //       signedInFlow()
-  //     }
-  //     else {
-  //       signedOutFlow();
-  //     }
-  //   }
   qs('nav #my-account').onclick = navClickHandler_ConnectFirst
-  // qs('#logo').onclick =
-  //   async function (event) {
-  //     event.preventDefault()
-  //     if (walletProvider.wallet.isConnected()) {
-  //       signedInFlow()
-  //     }
-  //     else {
-  //       signedOutFlow();
-  //     }
-  //   }
+  
 
   //generic nav handler
   function navClickHandler_ConnectFirst(event: Event) {
@@ -159,18 +139,6 @@ function uiInit() {
           showErr(ex)
         }
       }
-
-    // qs(`#${token} #near-deposit-balance a .max`).onclick =
-    //   async function (event) {
-    //     try {
-    //       event.preventDefault()
-    //       let tokenCtr = tokens[(token as keyof typeof tokenTypes)]
-    //       qsi(`#${token} #stakeAmount`).value = convertToDecimals(tokenCtr.accountInfo, tokenCtr.metaData!.decimals).toString()
-    //     }
-    //     catch (ex) {
-    //       showErr(ex)
-    //     }
-    //   }
     }
 }
 uiInit()
