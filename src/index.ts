@@ -346,7 +346,7 @@ async function refreshAccountInfo() {
         }
         qs(`#${token}-container #${token}-cookie-price .value`).innerHTML = cookiePriceDisplayable
 
-        if(cookiePrice != 0n) {
+        if(cookiePrice != BigInt(0)) {
           console.log("Cookie price: ", cookiePrice)
           console.log("accountInfo: ", accountInfo)
           let cookiesReceived = BigInt(accountInfo) / BigInt(cookiePrice);
