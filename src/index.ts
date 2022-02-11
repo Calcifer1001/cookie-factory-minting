@@ -282,15 +282,16 @@ async function refreshAccountInfo() {
   try {
 
     let accName = walletProvider.wallet.getAccountId();
+    let accNameShort = accName;
+    if (accName.length > 22) accNameShort = accName.slice(0, 10) + ".." + accName.slice(-10);
 
-    if (accName.length > 22) accName = accName.slice(0, 10) + ".." + accName.slice(-10);
-
-    qs(".user-info #account-id").innerText = accName;
+    qs(".user-info #account-id").innerText = accNameShort;
     //update account & contract stats
     if (walletProvider.wallet.isConnected()) {
 
       for (const token in tokenTypes) {
         let tokenCtr = tokens[(token as keyof typeof tokenTypes)]
+        console.log("AccName: ", accName)
         let balance = await tokenCtr.tokenContractName.ft_balance_of(accName);
         let metaData = await tokenCtr.tokenContractName.ft_metadata();
         let walletAvailable = toStringDec(Number.parseFloat(convertToDecimals(balance, metaData.decimals)))
@@ -470,19 +471,20 @@ window.onload = async function () {
     addNarwalletsListeners(narwalletConnected, narwalletDisconnected) 
     //check if signed-in with NEAR Web Wallet
     await initNearWebWalletConnection()
-
+    
     if (nearWebWalletConnection.isSignedIn()) {
 
       //already signed-in with NEAR Web Wallet
       //make the contract use NEAR Web Wallet
       walletProvider.wallet = new NearWebWallet(nearWebWalletConnection);
       await signedInFlow()
+      await setCountdown()
       //set-up auto-refresh loop (10 min)
       autoRefresh()
       //check if we're re-spawning after a wallet-redirect
       //show transaction result depending on method called
       const { err, data, method, finalExecutionOutcome } = await checkRedirectSearchParams(nearWebWalletConnection, nearConfig.explorerUrl || "explorer");
-
+      
       if (finalExecutionOutcome)
         var args = JSON.parse(atob(finalExecutionOutcome.transaction.actions[0].FunctionCall.args))
 
@@ -568,7 +570,7 @@ window.onload = async function () {
       //not signed-in 
       await signedOutFlow() //show home-not-connected -> select wallet page
     }
-    await setCountdown()
+    
   } catch (ex) {
     showErr(ex)
   }
