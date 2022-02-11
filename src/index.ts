@@ -406,10 +406,12 @@ async function setCountdown() {
   let stNearCtr = tokens[(tokenTypes.stNear as keyof typeof tokenTypes)]
   let stNearcontractParams = await stNearCtr.contract.get_contract_params()
     
-  var endDate = new Date(stNearcontractParams.closing_date);
+  let timeStampInSeconds = parseInt(stNearcontractParams.closing_date);
+  var endDate = new Date(timeStampInSeconds * 1000);
+  console.log("endDate: ", stNearcontractParams.closing_date + "000")
   
   var countDownDate = new Date(endDate.getTime() - endDate.getTimezoneOffset() * 60000)
-  console.log(countDownDate)
+  console.log("Countdown date: ", countDownDate)
 
   var x = setInterval(function () {
 
